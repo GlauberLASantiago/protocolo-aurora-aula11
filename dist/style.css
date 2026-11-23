@@ -24,3 +24,4 @@
 .guide-contents a:hover{background:#f8f4ff;border-color:#9e82bb}
 .app-credit{padding:22px 6vw;text-align:center;border-top:1px solid var(--line);font-size:.88rem;line-height:1.7;color:var(--muted);background:#111426;text-wrap:pretty}
 @media(max-width:760px){#library[data-view="full"]>.dialog-body{padding:14px 10px}.guide-contents{padding:12px;margin-bottom:14px}.guide-contents nav{grid-template-columns:1fr;max-height:46vh;overflow:auto}.guide-full .guide-document{border-radius:10px!important}.guide-full .guide-table-region{box-shadow:inset -5px 0 10px #6e58801a}.app-credit{padding:18px 22px;font-size:.85rem}}
+.participant-input{display:block;width:100%;margin:10px 0 20px;padding:13px;border:1px solid #c8badb;border-radius:9px;color:#3a2c49;background:white}

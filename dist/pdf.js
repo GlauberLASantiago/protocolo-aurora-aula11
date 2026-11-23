@@ -28,7 +28,7 @@
  function createParticipationPdf(s,rooms){
   if(s.results.filter(Boolean).length!==6)throw Error('Conclua as seis salas antes de emitir o comprovante.');
   if(!s.name.trim())throw Error('Informe o nome do participante.');
-  const doc=new Doc(),completed=s.completedAt||new Date().toISOString();doc.id=s.id;
+  const doc=new Doc(),completed=s.completedAt||new Date().toISOString(),partner=String(s.partnerName||'').trim().replace(/[\x00-\x1f]/g,'').slice(0,100);doc.id=s.id;
   doc.newPage('certificate');
   doc.rect(0,0,595,842,'white');doc.rect(23,23,549,796,'white','line');doc.rect(23,23,549,11,'violet');
   doc.text('PROTOCOLO',51,72,11,true,'violet');doc.text('AURORA',51,101,26,true,'ink');doc.text('LABORATÓRIO DE DECISÕES COM IA',51,124,8,false,'muted');
@@ -37,16 +37,17 @@
   doc.line(51,151,544,151,'line');doc.text('REGISTRO DE CONCLUSÃO DO PERCURSO',51,183,9,true,'violet');
   doc.text('Comprovante de',51,224,28,true);doc.text('participação',51,259,28,true);
   doc.text('Este documento registra a participação de',51,304,11,false,'muted');
-  const nameLines=wrap(s.name,480,24,true);let ny=344;nameLines.forEach(l=>{doc.text(l,51,ny,24,true,'violet');ny+=31;});
+  let nameSize=24,nameLines=wrap(s.name,480,nameSize,true);while(nameLines.length>2&&nameSize>14){nameSize--;nameLines=wrap(s.name,480,nameSize,true);}let ny=344;nameLines.forEach(l=>{doc.text(l,51,ny,nameSize,true,'violet');ny+=Math.ceil(nameSize*1.28);});
   let y=Math.max(397,ny+19);
   y=doc.block('no jogo Protocolo Aurora, com exploração das seis salas e registro de decisões sobre criatividade, autoria, automação, fontes, curadoria pedagógica e gestão de projetos com inteligência artificial.',51,y,480,11,18)+13;
   y=doc.block('Percurso concluído em '+formatDate(completed)+'.',51,y,480,11,18,true)+12;
-  doc.rect(51,y,493,76,'light');doc.text('PERCURSO',68,y+24,8,true,'muted');doc.text('6 salas concluídas',68,y+48,13,true,'violet');doc.text('MODALIDADE',299,y+24,8,true,'muted');doc.text(s.team?'Discussão em grupo':'Individual',299,y+48,13,true,'violet');y+=102;
+  doc.rect(51,y,493,76,'light');doc.text('PERCURSO',68,y+24,8,true,'muted');doc.text('6 salas concluídas',68,y+48,13,true,'violet');doc.text('DOCUMENTO',299,y+24,8,true,'muted');doc.text('Comprovante individual',299,y+48,13,true,'violet');y+=102;
+  if(partner)y=doc.block('Atividade realizada em dupla com: '+partner,51,y,480,10,15)+12;
   doc.block('Base de estudo: Guia da Aula 11 - Laboratório Criativo de Inteligência Artificial para Mídias Multiplataformas, de 17 de novembro de 2026.',51,y,480,9,14,false,'muted');
   doc.line(51,704,544,704,'line');doc.text('IDENTIFICADOR DA PARTIDA',51,728,8,true,'muted');doc.text(s.id,51,749,12,true,'violet');doc.block('Comprovante gerado localmente pelo jogo, sem assinatura ou validação institucional. Não atribui carga horária, créditos acadêmicos ou certificação de domínio. O relatório a seguir detalha as escolhas registradas.',51,772,480,8,12,false,'muted');
   doc.newPage();doc.heading('Identificação e percurso');
   doc.para('Participante: '+s.name,{bold:true});doc.para('Partida: '+s.id);doc.para('Início: '+formatDate(s.startedAt||completed,true)+' (horário de Brasília).');doc.para('Conclusão do percurso: '+formatDate(completed,true)+' (horário de Brasília).');doc.para('Arquivo emitido em: '+formatDate(new Date().toISOString(),true)+' (horário de Brasília).');
-  doc.para('Modalidade: '+(s.team?'discussão em grupo; comprovante individual das decisões compartilhadas.':'individual.'));
+  doc.para('Registro individual de participação.');if(partner)doc.para('Atividade realizada em dupla com: '+partner);
   doc.para('Conclusão das salas: 6 de 6. Rodadas de decisão registradas: '+s.attempts.reduce((a,n)=>a+n,0)+'.');
   const avg=Math.round(s.results.reduce((a,r)=>a+r.score,0)/6);doc.para('Síntese das decisões finais: '+avg+'/100. A pontuação é uma devolutiva didática e não equivale a nota ou medida de domínio.',{color:'muted'});
   doc.heading('Como ler este registro');doc.para('O relatório reúne as escolhas da última rodada avaliada de cada sala e a quantidade de revisões. A participação é reconhecida pela conclusão do percurso, independentemente da pontuação. Consultar o guia e revisar escolhas são parte da experiência.');doc.para('Todas as fontes do caso, personagens e respostas da IA no jogo são fictícios. Nenhum código foi executado em uma conta real. Os dados foram armazenados apenas neste navegador e neste arquivo.');

@@ -19,7 +19,7 @@ O percurso tem seis salas, com consulta livre ao guia, devolutivas comentadas e 
 5. Distribuição de entregas em uma EAP.
 6. Revisão de cronograma diante de restrições de capacidade e disponibilidade.
 
-Duração sugerida: 25 a 40 minutos. Pode ser jogado individualmente ou com discussão em grupo. O teclado permite navegar com Tab e acionar controles com Enter ou Espaço. Os efeitos sonoros podem ser desligados. Não há narração, cronômetro ou exigência de nota mínima.
+Duração sugerida: 25 a 40 minutos. Cada participante percorre as salas e emite seu próprio comprovante. O teclado permite navegar com Tab e acionar controles com Enter ou Espaço. Os efeitos sonoros podem ser desligados. Não há narração, cronômetro ou exigência de nota mínima.
 
 ## Comprovante e relatório PDF
 
@@ -27,11 +27,11 @@ Ao concluir as seis salas, o participante pode baixar um PDF com nome, data, ide
 
 O arquivo é gerado no próprio navegador, sem servidor de estudantes. **É um comprovante de participação autogerado pelo jogo, sem assinatura ou validação institucional**, sem carga horária atribuída e sem consulta pública de autenticidade. A pontuação é didática e não equivale a nota ou certificação de domínio. Para uso como evidência no AVA, o estudante pode anexar o PDF conforme a orientação do docente.
 
-Em grupo, os participantes podem emitir arquivos individuais alterando o nome ao final; o relatório informa que as decisões foram compartilhadas.
+Na emissão do PDF, o campo opcional “Nome da sua dupla” permite registrar a pessoa com quem a atividade foi realizada. Essa informação aparece no comprovante e no relatório; cada estudante emite e entrega seu próprio arquivo. O aplicativo não oferece modalidade de grupo.
 
 ## Privacidade
 
-Nome, escolhas e reflexão são armazenados no `localStorage` do navegador e no PDF baixado. Não há chamadas a APIs de IA, banco de dados de participantes ou telemetria do jogo. O serviço de hospedagem pode manter seus registros técnicos usuais. Limpar os dados do navegador pode apagar o progresso. Os efeitos usam a preferência local `edutec-sfx-enabled`, independente de narração.
+Nome, nome da dupla (quando informado), escolhas e reflexão são armazenados no `localStorage` do navegador e no PDF baixado. Não há chamadas a APIs de IA, banco de dados de participantes ou telemetria do jogo. O serviço de hospedagem pode manter seus registros técnicos usuais. Limpar os dados do navegador pode apagar o progresso. Os efeitos usam a preferência local `edutec-sfx-enabled`, independente de narração.
 
 ## Executar e verificar localmente
 

@@ -3,12 +3,17 @@ import vm from 'node:vm';
 import assert from 'node:assert/strict';
 
 // Runs the real decision engine with a minimal DOM host. No browser state is modified.
-const fake={innerHTML:'',textContent:'',setAttribute(){},focus(){}};
+const fake={innerHTML:'',textContent:'',open:false,showModal(){this.open=true;},setAttribute(){},focus(){}};
 const sandbox={document:{querySelector:()=>fake,addEventListener(){},visibilityState:'visible'},window:{scrollTo(){},addEventListener(){}},localStorage:{getItem:()=>null,setItem(){}},setInterval(){},setTimeout(){},clearTimeout(){},Date,Math,Intl,Uint8Array,console};
 vm.createContext(sandbox);
 vm.runInContext(fs.readFileSync(new URL('../dist/app.js',import.meta.url),'utf8'),sandbox);
 vm.runInContext(fs.readFileSync(new URL('../dist/pdf.js',import.meta.url),'utf8'),sandbox);
 const run=code=>vm.runInContext(code,sandbox);
+run('participant(true)');
+assert.doesNotMatch(fake.innerHTML,/name="(?:team|partner)"|jogar em grupo/i,'The start dialog must not offer a group mode or partner field');
+run('participant(false,true)');
+assert.match(fake.innerHTML,/name="partner"/,'The optional partner name belongs in PDF issuance');
+assert.doesNotMatch(fake.innerHTML,/<input[^>]*name="partner"[^>]*required/,'Partner name must remain optional');
 run("state.name='Participante de Demonstração';state.started=true;state.startedAt=new Date().toISOString();");
 const selections=[
  "state.drafts.prompt=['intent','context','repertoire','criteria']",
@@ -46,6 +51,16 @@ assert.ok(bytes.length>10000);
 const temp=new URL('../tmp/pdfs/',import.meta.url);fs.mkdirSync(temp,{recursive:true});fs.writeFileSync(new URL('engine-test.pdf',temp),bytes);
 run("state.name='Maria da Conceição Gonçalves de Albuquerque e Vasconcelos Santiago';state.reflection='Reflexão com acentuação: ação, evidência, criação. '.repeat(35).slice(0,1800)");
 fs.writeFileSync(new URL('long-name-test.pdf',temp),run('AuroraPDF.create(state,missions)'));
+run("state.partnerName='João Pedro de Demonstração';state.team=true");
+const partnerPdf=Buffer.from(run('AuroraPDF.create(state,missions)'));
+assert.match(partnerPdf.toString('latin1'),/Atividade realizada em dupla com:/);
+assert.ok(partnerPdf.includes(Buffer.from('João Pedro de Demonstração','latin1')),'The named partner must appear in the PDF');
+assert.doesNotMatch(partnerPdf.toString('latin1'),/Discuss|Modalidade:/,'Legacy group selection must not return as a modality');
+fs.writeFileSync(new URL('partner-test.pdf',temp),partnerPdf);
+run("state.partnerName='W'.repeat(100);state.name='W'.repeat(100)");
+fs.writeFileSync(new URL('partner-long-names-test.pdf',temp),run('AuroraPDF.create(state,missions)'));
+run("state.partnerName='  '");
+assert.doesNotMatch(Buffer.from(run('AuroraPDF.create(state,missions)')).toString('latin1'),/Atividade realizada em dupla com:/,'An empty optional field must not insert a partner claim');
 run("state.name='   '");
 assert.throws(()=>run('AuroraPDF.create(state,missions)'),/nome/);
-console.log('OK: six rooms, alternative decisions, revisions, capacity, dependencies, deadline and PDF generation.');
+console.log('OK: six rooms, revisions, planning, individual PDF issuance and optional named partner.');
