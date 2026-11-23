@@ -1,0 +1,7 @@
+.openai/
+tmp/
+outputs/
+*.tar.gz
+*.zip
+node_modules/
+.DS_Store
