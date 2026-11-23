@@ -1,3 +1,5 @@
+![Capa do Protocolo Aurora — Laboratório de decisões com IA](dist/assets/capa-protocolo-aurora.jpg)
+
 # Protocolo Aurora
 
 Jogo narrativo para estudantes de mestrado explorarem criatividade, autoria, automação, curadoria pedagógica e planejamento com inteligência artificial.
@@ -47,3 +49,9 @@ Também é possível abrir `dist/index.html` diretamente em um navegador; a pers
 O workflow `.github/workflows/pages.yml` verifica o JavaScript e os cenários do jogo, empacota `dist` e publica no GitHub Pages após alterações na branch `main`.
 
 Os arquivos editáveis são `dist/app.js`, `dist/style.css`, `dist/pdf.js`, `dist/guide.js` e `dist/index.html`. O PDF usa fontes padrão do formato PDF para o texto em português.
+
+## Capa
+
+Arte de abertura criada com geração de imagens por IA para este jogo. A mesma capa aparece no início do jogo, neste README e nos metadados de compartilhamento do GitHub Pages.
+
+[Arquivo da capa](dist/assets/capa-protocolo-aurora.jpg) · [Prompt de criação](artwork/capa-prompt.txt)
