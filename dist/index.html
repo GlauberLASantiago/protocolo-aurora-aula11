@@ -18,15 +18,28 @@
   <meta name="twitter:image" content="https://glauberlasantiago.github.io/protocolo-aurora-aula11/assets/capa-protocolo-aurora.jpg">
   <link rel="icon" type="image/svg+xml" href="assets/aurora-icon.svg">
   <title>Protocolo Aurora · Laboratório de decisões com IA</title>
-  <link rel="stylesheet" href="style.css?v=20261123-comprovante-dupla">
+  <link rel="stylesheet" href="style.css?v=20261123-gsap">
 </head>
 <body>
-  <div id="app"></div>
+  <div id="app">
+    <header class="topbar"><div class="brand"><span class="brand-icon" aria-hidden="true">✧</span><div>PROTOCOLO AURORA<small>LABORATÓRIO DE DECISÕES COM IA</small></div></div><a class="ghost" href="guia-aula-11.html">Consultar guia</a></header>
+    <main class="welcome">
+      <section class="cover-stage" aria-label="Capa do jogo Protocolo Aurora">
+        <img class="cover-image" src="assets/capa-protocolo-aurora.jpg" width="1672" height="941" alt="Protocolo Aurora — Laboratório de decisões com IA.">
+        <div class="cover-actions"><a class="primary" href="guia-aula-11.html">Ler guia integral</a><a class="secondary" href="./">Recarregar jogo</a></div>
+      </section>
+      <section class="motion-fallback"><h1>Protocolo Aurora</h1><p>A experiência interativa utiliza JavaScript. Você pode consultar o guia integral pelos links desta página caso os recursos do jogo não carreguem.</p><noscript><p>Para jogar, habilite o JavaScript no navegador. A leitura do guia continua disponível sem ele.</p></noscript></section>
+    </main>
+    <footer class="app-credit">Desenvolvido pelo professor Nelson Santiago, UFSCar, para a amada turma de Laboratório Criativo de Inteligência Artificial para Mídias Multiplataformas, de 2026.</footer>
+  </div>
   <dialog id="library" aria-labelledby="library-title"></dialog>
   <dialog id="help" aria-labelledby="help-title"></dialog>
   <div id="announcer" class="sr-only" role="status" aria-live="polite"></div>
   <script src="guide.js?v=20261123-guia-formatado"></script>
   <script src="pdf.js?v=20261123-comprovante-dupla"></script>
-  <script src="app.js?v=20261123-comprovante-dupla"></script>
+  <script src="vendor/gsap-3.15.1.min.js"></script>
+  <script src="vendor/Flip-3.15.1.min.js"></script>
+  <script src="motion.js?v=20261123-gsap"></script>
+  <script src="app.js?v=20261123-gsap"></script>
 </body>
 </html>

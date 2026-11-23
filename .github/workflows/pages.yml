@@ -26,10 +26,13 @@ jobs:
           node --check dist/app.js
           node --check dist/pdf.js
           node --check dist/guide.js
+          node --check dist/motion.js
       - name: Verificar decisões e geração do PDF
         run: node tests/verify.mjs
       - name: Verificar formatação e conteúdo do guia integral
         run: node tests/verify-guide.mjs
+      - name: Verificar movimento, acessibilidade e alternativas sem scripts
+        run: node tests/verify-motion.mjs
       - uses: actions/configure-pages@v5
       - name: Identificar pacote desta tentativa
         id: package

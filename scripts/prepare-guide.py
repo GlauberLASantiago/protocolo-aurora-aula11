@@ -77,4 +77,17 @@ text = '\n'.join(s.strip() for s in BeautifulSoup(source, 'html.parser').strippe
     + 'const GUIDE_TEXT=' + json.dumps(text, ensure_ascii=False) + ';\n',
     encoding='utf-8',
 )
+# A native, script-free reading route remains usable if game scripts cannot load.
+(ROOT / 'dist/guia-aula-11.html').write_text(
+    '<!doctype html><html lang="pt-BR"><head><meta charset="utf-8">'
+    '<meta name="viewport" content="width=device-width,initial-scale=1">'
+    '<title>Guia de estudos - Aula 11 | Protocolo Aurora</title>'
+    '<style>body{margin:0;padding:20px 12px;background:#f1f0f8;font-family:Segoe UI,system-ui,sans-serif}'
+    '.guide-reading-nav{max-width:850px;margin:0 auto 20px;line-height:1.7}'
+    '.guide-reading-nav a{color:#604295;font-weight:600}'
+    '.guide-table-region{overflow:auto}.guide-table{min-width:560px}'
+    '.guide-schedule{min-width:660px!important}</style></head><body>'
+    '<nav class="guide-reading-nav" aria-label="Navegação do material"><a href="./">Voltar ao Protocolo Aurora</a></nav>'
+    + html + '</body></html>', encoding='utf-8',
+)
 print(f'Guide preserved: {len(sections)} sections, 3 tables, 6 expandable answer explanations.')

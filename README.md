@@ -41,6 +41,7 @@ Não há dependências de instalação ou etapa de compilação.
 python -m http.server 8766 --directory dist
 node tests/verify.mjs
 node tests/verify-guide.mjs
+node tests/verify-motion.mjs
 ```
 
 Também é possível abrir `dist/index.html` diretamente em um navegador; a persistência em URLs `file:` depende do navegador. A opção recomendada para a turma é o link do GitHub Pages.
@@ -49,9 +50,15 @@ Também é possível abrir `dist/index.html` diretamente em um navegador; a pers
 
 O workflow `.github/workflows/pages.yml` verifica o JavaScript e os cenários do jogo, empacota `dist` e publica no GitHub Pages após alterações na branch `main`.
 
-Os arquivos editáveis são `dist/app.js`, `dist/style.css`, `dist/pdf.js`, `dist/guide.js` e `dist/index.html`. O PDF usa fontes padrão do formato PDF para o texto em português.
+Os arquivos editáveis são `dist/app.js`, `dist/style.css`, `dist/motion.js`, `dist/pdf.js`, `dist/guide.js` e `dist/index.html`. O PDF usa fontes padrão do formato PDF para o texto em português.
 
-O guia integral preserva a estrutura HTML do anexo em `content/guia-aula-11.html`, incluindo tabelas, diagramas, quadros e respostas expansíveis. Após uma alteração nesse arquivo, regenere o módulo com `python scripts/prepare-guide.py` (requer BeautifulSoup somente no ambiente de edição). A execução do jogo permanece sem dependências externas.
+O guia integral preserva a estrutura HTML do anexo em `content/guia-aula-11.html`, incluindo tabelas, diagramas, quadros e respostas expansíveis. Após uma alteração nesse arquivo, regenere o módulo com `python scripts/prepare-guide.py` (requer BeautifulSoup somente no ambiente de edição). A execução do jogo permanece sem dependências externas de rede.
+
+## Movimento e acessibilidade
+
+GSAP Core 3.15.1 e o plugin Flip estão incluídos localmente em `dist/vendor`, a partir de uma revisão fixa do repositório oficial. As transições são breves, respeitam `prefers-reduced-motion` e são limpas na troca de tela, no fechamento das janelas e no redimensionamento. A rolagem permanece nativa. Se as bibliotecas não carregarem, o jogo continua com atualizações instantâneas. Se o JavaScript do jogo não carregar, a página oferece o [guia integral sem scripts](dist/guia-aula-11.html).
+
+[Análise da interface, melhorias, arquivos e testes](docs/experiencia-gsap.md).
 
 ## Capa
 
