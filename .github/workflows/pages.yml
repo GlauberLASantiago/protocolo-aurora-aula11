@@ -15,11 +15,10 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+    outputs:
+      artifact_name: ${{ steps.package.outputs.name }}
     steps:
       - uses: actions/checkout@v4
       - name: Verificar JavaScript
@@ -30,9 +29,22 @@ jobs:
       - name: Verificar decisões e geração do PDF
         run: node tests/verify.mjs
       - uses: actions/configure-pages@v5
+      - name: Identificar pacote desta tentativa
+        id: package
+        run: echo "name=aurora-pages-${{ github.run_id }}-${{ github.run_attempt }}" >> "$GITHUB_OUTPUT"
       - uses: actions/upload-pages-artifact@v3
         with:
+          name: ${{ steps.package.outputs.name }}
           path: dist
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
       - name: Publicar
         id: deployment
         uses: actions/deploy-pages@v4
+        with:
+          artifact_name: ${{ needs.build.outputs.artifact_name }}
