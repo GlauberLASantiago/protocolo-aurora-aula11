@@ -2,3 +2,25 @@
 .station-nav .nav-symbol svg{width:18px;height:18px}.dialog-body h3 svg{width:21px;height:21px;vertical-align:middle;margin-right:6px}.dialog-body .primary{background:#66458e;color:white}.dialog-body .secondary{background:#e4dbee;color:#513569;border-color:#c9bbdb}.dialog-body .danger{background:#894458;color:white}
 /* Capa ilustrada e controles de abertura */
 .welcome{padding-top:26px}.cover-stage{position:relative;isolation:isolate;border:1px solid #57466b;border-radius:20px;overflow:hidden;background:#1a1631;box-shadow:0 20px 80px #0003}.cover-image{display:block;width:100%;height:auto;aspect-ratio:1672/941;object-fit:contain}.cover-stage:after{content:'';position:absolute;inset:60% 0 0;background:linear-gradient(transparent,#111426c9);z-index:0;pointer-events:none}.cover-actions{position:absolute;bottom:28px;right:28px;z-index:1;display:flex;gap:12px;flex-wrap:wrap}.cover-actions .secondary{background:#211c35e8;backdrop-filter:blur(8px);border-color:#a691c0}.cover-actions .primary{box-shadow:0 4px 24px #09051070}.landing-copy{display:grid;grid-template-columns:1fr auto;align-items:center;gap:30px;padding:38px 0 28px}.landing-copy h1{font-size:clamp(1.8rem,3vw,2.6rem);line-height:1.2;letter-spacing:-.04em;margin:15px 0}.landing-copy h1 em{font-style:normal;color:var(--violet)}.landing-copy p{max-width:760px;font-size:1rem;color:var(--muted);line-height:1.7;margin-bottom:0}.landing-copy .landing-meta{max-width:245px;align-content:center;margin:0}.landing-copy .pill{font-size:.76rem}@media(max-width:900px){.landing-copy{grid-template-columns:1fr;gap:20px}.landing-copy .landing-meta{max-width:none}.cover-actions{bottom:18px;right:18px}}@media(max-width:760px){.welcome{padding-top:20px}.cover-stage{border-radius:13px}.cover-stage:after{display:none}.cover-actions{position:static;padding:16px;background:#1a182c;justify-content:center}.cover-actions .primary,.cover-actions .secondary{flex:1;padding:12px;white-space:nowrap;font-size:.86rem}.landing-copy{padding:30px 0 24px}.landing-copy .eyebrow{font-size:.67rem}}@media(max-width:390px){.cover-actions{gap:10px;padding:12px}.cover-actions .primary,.cover-actions .secondary{flex-basis:100%}}
+/* Documento integral: mantém as tabelas, os quadros e os diagramas do anexo. */
+#library[data-view="full"]{width:min(1060px,calc(100vw - 28px))}
+#library[data-view="full"]>.dialog-body{padding:22px}
+.guide-full{white-space:normal;font-size:1rem;line-height:1.75;min-width:0}
+.guide-full .guide-document{width:100%;min-width:0;box-sizing:border-box}
+.guide-full p,.guide-full li{font-size:1rem;line-height:1.75}
+.guide-full h1,.guide-full h2,.guide-full h3,.guide-full h4{overflow-wrap:break-word}
+.guide-full h2[id]{scroll-margin-top:100px}
+.guide-full .guide-table-region{max-width:100%;overflow-x:auto;overscroll-behavior-x:contain;scrollbar-color:#9d87b6 #eee8f4;scrollbar-width:auto;border-radius:10px}
+.guide-full .guide-table-region:focus-visible{outline:3px solid #7553a4;outline-offset:4px}
+.guide-full .guide-table{min-width:560px}
+.guide-full .guide-schedule{min-width:660px!important}
+.guide-full th,.guide-full td{font-size:1rem;line-height:1.65;word-break:normal}
+.guide-full a{text-decoration:underline;text-underline-offset:3px}
+.guide-full summary{min-height:44px}
+.guide-contents{max-width:850px;margin:0 auto 20px;border:1px solid #d6cbe3;border-radius:12px;background:#eee7f6;padding:14px 18px}
+.guide-contents>summary{cursor:pointer;font-size:.93rem;font-weight:600;color:#5d407e;padding:2px 0;min-height:30px}
+.guide-contents nav{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}
+.guide-contents a{padding:10px 12px;background:#fff;border:1px solid #ded3e9;border-radius:8px;color:#5e437d;font-size:.88rem;line-height:1.5;text-decoration:none}
+.guide-contents a:hover{background:#f8f4ff;border-color:#9e82bb}
+.app-credit{padding:22px 6vw;text-align:center;border-top:1px solid var(--line);font-size:.88rem;line-height:1.7;color:var(--muted);background:#111426;text-wrap:pretty}
+@media(max-width:760px){#library[data-view="full"]>.dialog-body{padding:14px 10px}.guide-contents{padding:12px;margin-bottom:14px}.guide-contents nav{grid-template-columns:1fr;max-height:46vh;overflow:auto}.guide-full .guide-document{border-radius:10px!important}.guide-full .guide-table-region{box-shadow:inset -5px 0 10px #6e58801a}.app-credit{padding:18px 22px;font-size:.85rem}}
