@@ -119,7 +119,7 @@ function render(keepScroll=false,change={}){
  const scroll=window.scrollY;
  const positions=keepScroll?[...(app.querySelectorAll?.('[data-scroll-key]')||[])].map(el=>({key:el.dataset.scrollKey,left:el.scrollLeft,top:el.scrollTop})):[];
  globalThis.AuroraMotion?.beforeRender();
- app.innerHTML=topbar()+(state.screen==='welcome'?welcome():`<div class="app-shell">${sidebar()}<main class="workspace" id="main-content">${state.screen==='map'?mapScreen():state.screen==='report'?reportScreen():missionScreen()}</main></div>`)+`<footer class="app-credit">Desenvolvido pelo professor Nelson Santiago, UFSCar, para a amada turma de Laboratório Criativo de Inteligência Artificial para Mídias Multiplataformas, de 2026.</footer>`;
+ app.innerHTML=topbar()+(state.screen==='welcome'?welcome():`<div class="app-shell">${sidebar()}<main class="workspace" id="main-content">${state.screen==='map'?mapScreen():state.screen==='report'?reportScreen():missionScreen()}</main></div>`)+`<footer class="app-credit">Desenvolvido pelo professor Glauber Santiago, UFSCar, para a amada turma de Laboratório Criativo de Inteligência Artificial para Mídias Multiplataformas, de 2026.</footer>`;
  for(const pos of positions){const el=app.querySelector?.(`[data-scroll-key="${pos.key}"]`);if(el){el.scrollLeft=pos.left;el.scrollTop=pos.top;}}
  if(keepScroll)window.scrollTo(0,scroll);else window.scrollTo(0,0);
  globalThis.AuroraMotion?.render(app,{screen:state.screen,room:state.room,change});
